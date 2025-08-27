@@ -220,32 +220,32 @@ class CardGenerator:
                 draw.text((x_pos, y_pos), company, fill=color_scheme['secondary'], font=font_medium)
                 y_pos += line_height + 10
             
-            # Contact information with colorful icons
+            # Contact information with text labels
             contact_info = []
             if card_data.get('email'):
-                contact_info.append(f"📧 {card_data['email']}")
+                contact_info.append(f"Email: {card_data['email']}")
             if card_data.get('phone'):
-                contact_info.append(f"📱 {card_data['phone']}")
+                contact_info.append(f"Phone: {card_data['phone']}")
             if card_data.get('website'):
-                contact_info.append(f"🌍 {card_data['website']}")
+                contact_info.append(f"Web: {card_data['website']}")
             if card_data.get('address'):
-                contact_info.append(f"🏢 {card_data['address']}")
+                contact_info.append(f"Address: {card_data['address']}")
             
             # Social media information
             social_info = []
-            social_icons = {
-                'linkedin': '🔗',
-                'twitter': '🐦',
-                'instagram': '📸',
-                'github': '🐙',
-                'facebook': '👥',
-                'tiktok': '🎬'
+            social_labels = {
+                'linkedin': 'LinkedIn:',
+                'twitter': 'Twitter:',
+                'instagram': 'Instagram:',
+                'github': 'GitHub:',
+                'facebook': 'Facebook:',
+                'tiktok': 'TikTok:'
             }
             
             if card_data.get('social_media'):
                 for platform, value in card_data['social_media'].items():
                     if value:
-                        icon = social_icons.get(platform, '🔗')
+                        label = social_labels.get(platform, 'Social:')
                         if platform == 'linkedin':
                             display_value = value.replace('https://linkedin.com/in/', 'in/').replace('https://www.linkedin.com/in/', 'in/')
                         elif platform in ['twitter', 'instagram', 'tiktok']:
@@ -256,7 +256,7 @@ class CardGenerator:
                             display_value = value.replace('https://facebook.com/', '').replace('https://www.facebook.com/', '')
                         else:
                             display_value = value
-                        social_info.append(f"{icon} {display_value}")
+                        social_info.append(f"{label} {display_value}")
             
             # Combine contact and social info
             all_contact_info = contact_info + social_info
