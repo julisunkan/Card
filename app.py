@@ -65,7 +65,7 @@ def preview():
         logo_file = None
         if 'logo' in request.files and request.files['logo'].filename:
             file = request.files['logo']
-            if file and allowed_file(file.filename):
+            if file and file.filename and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 logo_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(logo_path)
@@ -136,7 +136,7 @@ def batch_upload():
             flash('No file selected', 'error')
             return redirect(url_for('batch'))
         
-        if not file.filename.lower().endswith('.csv'):
+        if not file.filename or not file.filename.lower().endswith('.csv'):
             flash('Please upload a CSV file', 'error')
             return redirect(url_for('batch'))
         

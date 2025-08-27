@@ -1,5 +1,6 @@
 import os
 import qrcode
+from qrcode import constants
 from PIL import Image, ImageDraw, ImageFont
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
@@ -77,7 +78,7 @@ END:VCARD"""
             
             qr = qrcode.QRCode(
                 version=1,
-                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                error_correction=constants.ERROR_CORRECT_L,
                 box_size=10,
                 border=4,
             )
@@ -307,7 +308,7 @@ END:VCARD"""
             # Get color scheme
             color_scheme = self.get_color_scheme(card_data.get('color', 'blue'))
             primary_rgb = self._hex_to_rgb(color_scheme['primary'])
-            primary_color = Color(primary_rgb[0]/255, primary_rgb[1]/255, primary_rgb[2]/255)
+            primary_color = Color(int(primary_rgb[0])/255.0, int(primary_rgb[1])/255.0, int(primary_rgb[2])/255.0)
             
             # Draw text
             text_x = x_offset + 20
