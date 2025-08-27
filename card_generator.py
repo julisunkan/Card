@@ -167,12 +167,12 @@ class CardGenerator:
                 font_large = ImageFont.truetype("arial.ttf", 24)
                 font_medium = ImageFont.truetype("arial.ttf", 16)
                 font_small = ImageFont.truetype("arial.ttf", 12)
-            except:
+            except (OSError, IOError):
                 try:
                     font_large = ImageFont.load_default()
                     font_medium = ImageFont.load_default()
                     font_small = ImageFont.load_default()
-                except:
+                except (OSError, IOError):
                     font_large = font_medium = font_small = None
             
             # Calculate text positioning
@@ -455,7 +455,7 @@ class CardGenerator:
             # Get color scheme
             color_scheme = self.get_color_scheme(card_data.get('color', 'blue'))
             primary_rgb = self._hex_to_rgb(color_scheme['primary'])
-            primary_color = colors.Color(primary_rgb[0]/255.0, primary_rgb[1]/255.0, primary_rgb[2]/255.0)
+            primary_color = colors.Color(int(primary_rgb[0])/255.0, int(primary_rgb[1])/255.0, int(primary_rgb[2])/255.0, alpha=1)
             
             # Draw text
             text_x = x_offset + 20
@@ -523,10 +523,93 @@ class CardGenerator:
             raise
     
     def generate_print_pdf(self, card_data, logo_path=None):
-        """Generate print-ready PDF with CMYK colors"""
-        # For now, use the same PDF generation as above
-        # In a production environment, you'd use a library that supports CMYK
-        return self.generate_pdf(card_data, logo_path)
+        """Generate print-ready PDF with enhanced settings"""
+        try:
+            export_filename = f"business_card_print_{uuid.uuid4().hex}.pdf"
+            export_path = os.path.join('exports', export_filename)
+            
+            # Use high-resolution settings for print
+            c = canvas.Canvas(export_path, pagesize=letter)
+            
+            # Set high-quality print settings
+            c.setPageCompression(1)  # Enable compression
+            c.setTitle("Business Card - Print Ready")
+            c.setSubject("Professional Business Card")
+            
+            # Use the same layout but with print optimization
+            card_width_pt = (self.card_width / 96) * 72 * 1.5  # Higher resolution
+            card_height_pt = (self.card_height / 96) * 72 * 1.5
+            
+            page_width, page_height = letter
+            x_offset = (page_width - card_width_pt) / 2
+            y_offset = (page_height - card_height_pt) / 2
+            
+            # Enhanced print layout
+            c.setFillColor(colors.white)
+            c.rect(x_offset, y_offset, card_width_pt, card_height_pt, fill=1)
+            
+            # Add crop marks for professional printing
+            crop_length = 10
+            c.setStrokeColor(colors.black)
+            c.setLineWidth(0.5)
+            
+            # Top-left crop mark
+            c.line(x_offset - crop_length, y_offset + card_height_pt, 
+                   x_offset, y_offset + card_height_pt)
+            c.line(x_offset, y_offset + card_height_pt, 
+                   x_offset, y_offset + card_height_pt + crop_length)
+            
+            # Continue with standard PDF generation
+            color_scheme = self.get_color_scheme(card_data.get('color', 'blue'))
+            primary_rgb = self._hex_to_rgb(color_scheme['primary'])
+            primary_color = colors.Color(int(primary_rgb[0])/255.0, int(primary_rgb[1])/255.0, int(primary_rgb[2])/255.0, alpha=1)
+            
+            # Use larger fonts for print
+            text_x = x_offset + 30
+            text_y = y_offset + card_height_pt - 60
+            
+            if card_data.get('name'):
+                c.setFillColor(primary_color)
+                c.setFont("Helvetica-Bold", 20)
+                c.drawString(text_x, text_y, card_data['name'])
+                text_y -= 35
+            
+            if card_data.get('job_title'):
+                c.setFillColor(colors.black)
+                c.setFont("Helvetica", 16)
+                c.drawString(text_x, text_y, card_data['job_title'])
+                text_y -= 30
+            
+            if card_data.get('company'):
+                c.setFillColor(colors.grey)
+                c.setFont("Helvetica", 16)
+                c.drawString(text_x, text_y, card_data['company'])
+                text_y -= 35
+            
+            # Contact info with enhanced spacing
+            c.setFillColor(colors.black)
+            c.setFont("Helvetica", 12)
+            
+            contact_info = []
+            if card_data.get('email'):
+                contact_info.append(f"Email: {card_data['email']}")
+            if card_data.get('phone'):
+                contact_info.append(f"Phone: {card_data['phone']}")
+            if card_data.get('website'):
+                contact_info.append(f"Web: {card_data['website']}")
+            if card_data.get('address'):
+                contact_info.append(f"Address: {card_data['address']}")
+            
+            for info in contact_info:
+                c.drawString(text_x, text_y, info)
+                text_y -= 20
+            
+            c.save()
+            return export_path
+            
+        except Exception as e:
+            logging.error(f"Error generating print PDF: {str(e)}")
+            raise
     
     def generate_animated_html(self, card_data, logo_path=None):
         """Generate animated HTML business card"""
