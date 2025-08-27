@@ -27,7 +27,15 @@ class CardGenerator:
             {'id': 'classic', 'name': 'Classic', 'description': 'Traditional business card layout'},
             {'id': 'creative', 'name': 'Creative', 'description': 'Bold and colorful design'},
             {'id': 'elegant', 'name': 'Elegant', 'description': 'Sophisticated and professional'},
-            {'id': 'tech', 'name': 'Tech', 'description': 'Modern technology-focused design'}
+            {'id': 'tech', 'name': 'Tech', 'description': 'Modern technology-focused design'},
+            {'id': 'corporate', 'name': 'Corporate', 'description': 'Professional business style'},
+            {'id': 'artistic', 'name': 'Artistic', 'description': 'Creative with artistic flair'},
+            {'id': 'minimal', 'name': 'Minimal', 'description': 'Ultra-clean simple design'},
+            {'id': 'bold', 'name': 'Bold', 'description': 'Strong visual impact design'},
+            {'id': 'vintage', 'name': 'Vintage', 'description': 'Retro classic appearance'},
+            {'id': 'geometric', 'name': 'Geometric', 'description': 'Modern geometric patterns'},
+            {'id': 'gradient', 'name': 'Gradient', 'description': 'Smooth color transitions'},
+            {'id': 'executive', 'name': 'Executive', 'description': 'Premium luxury design'}
         ]
     
     @staticmethod
@@ -260,6 +268,67 @@ END:VCARD"""
             draw.rectangle([(0, 0), (10, self.card_height)], fill=primary_color)
             for i in range(0, self.card_width, 40):
                 draw.line([(i, 0), (i+20, 20)], fill=primary_color, width=1)
+        
+        elif template == 'corporate':
+            # Corporate: Professional double border
+            draw.rectangle([(0, 0), (self.card_width-1, self.card_height-1)], 
+                         outline=primary_color, width=3)
+            draw.rectangle([(5, 5), (self.card_width-6, self.card_height-6)], 
+                         outline=primary_color, width=1)
+        
+        elif template == 'artistic':
+            # Artistic: Creative curved lines
+            rgb = self._hex_to_rgb(primary_color)
+            for i in range(0, self.card_width, 20):
+                x = i
+                y = int(20 * (1 + 0.5 * (i / self.card_width)))
+                draw.ellipse([(x-10, y-10), (x+10, y+10)], outline=rgb, width=2)
+        
+        elif template == 'minimal':
+            # Minimal: Just a subtle line
+            draw.line([(20, self.card_height-20), (self.card_width-20, self.card_height-20)], 
+                     fill=primary_color, width=1)
+        
+        elif template == 'bold':
+            # Bold: Strong geometric shapes
+            draw.rectangle([(0, 0), (30, self.card_height)], fill=primary_color)
+            draw.polygon([(30, 0), (60, 0), (30, 30)], fill=primary_color)
+        
+        elif template == 'vintage':
+            # Vintage: Ornate corner elements
+            rgb = self._hex_to_rgb(primary_color)
+            # Top corners
+            for i in range(3):
+                draw.rectangle([(10+i*5, 10+i*2), (40-i*5, 12+i*2)], outline=rgb)
+                draw.rectangle([(self.card_width-40+i*5, 10+i*2), 
+                              (self.card_width-10-i*5, 12+i*2)], outline=rgb)
+        
+        elif template == 'geometric':
+            # Geometric: Modern shapes pattern
+            rgb = self._hex_to_rgb(primary_color)
+            for i in range(0, self.card_width, 60):
+                # Triangles
+                draw.polygon([(i, 0), (i+15, 0), (i+7, 15)], fill=rgb)
+                # Circles
+                draw.ellipse([(i+20, 5), (i+35, 20)], outline=rgb, width=2)
+        
+        elif template == 'gradient':
+            # Gradient: Smooth color transition
+            rgb = self._hex_to_rgb(primary_color)
+            for i in range(self.card_height):
+                opacity = int(255 * (1 - i / self.card_height) * 0.3)
+                if opacity > 0:
+                    color = tuple(min(255, c + opacity//3) for c in rgb)
+                    draw.line([(0, i), (self.card_width, i)], fill=color)
+        
+        elif template == 'executive':
+            # Executive: Luxury gold-style accent
+            draw.rectangle([(0, 0), (self.card_width, 8)], fill=primary_color)
+            draw.rectangle([(0, self.card_height-8), (self.card_width, self.card_height)], 
+                         fill=primary_color)
+            # Side accent
+            draw.rectangle([(self.card_width-8, 0), (self.card_width, self.card_height)], 
+                         fill=primary_color)
     
     def _hex_to_rgb(self, hex_color):
         """Convert hex color to RGB tuple"""
