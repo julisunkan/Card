@@ -1,6 +1,6 @@
 import os
 import logging
-from flask import Flask, render_template, request, send_file, flash, redirect, url_for, jsonify
+from flask import Flask, render_template, request, send_file, flash, redirect, url_for, jsonify, session
 from werkzeug.utils import secure_filename
 from werkzeug.middleware.proxy_fix import ProxyFix
 import zipfile
@@ -74,6 +74,10 @@ def preview():
         generator = CardGenerator()
         preview_path = generator.generate_preview(card_data, logo_file)
         
+        # Store card data in session for export
+        session['card_data'] = card_data
+        session['logo_file'] = logo_file
+        
         return render_template('preview.html', 
                              card_data=card_data, 
                              preview_image=preview_path,
@@ -88,25 +92,30 @@ def preview():
 def export_card(format):
     """Export business card in specified format"""
     try:
-        # Get card data from session or form
-        card_data = request.args.to_dict()
+        # Get card data from session
+        card_data = session.get('card_data', {})
+        logo_file = session.get('logo_file', None)
+        
+        if not card_data:
+            flash('No card data found. Please create a card first.', 'error')
+            return redirect(url_for('index'))
         
         generator = CardGenerator()
         
         if format == 'png':
-            file_path = generator.generate_png(card_data)
+            file_path = generator.generate_png(card_data, logo_file)
             return send_file(file_path, as_attachment=True, download_name='business_card.png')
         
         elif format == 'pdf':
-            file_path = generator.generate_pdf(card_data)
+            file_path = generator.generate_pdf(card_data, logo_file)
             return send_file(file_path, as_attachment=True, download_name='business_card.pdf')
         
         elif format == 'pdf_print':
-            file_path = generator.generate_print_pdf(card_data)
+            file_path = generator.generate_print_pdf(card_data, logo_file)
             return send_file(file_path, as_attachment=True, download_name='business_card_print.pdf')
         
         elif format == 'html':
-            file_path = generator.generate_animated_html(card_data)
+            file_path = generator.generate_animated_html(card_data, logo_file)
             return send_file(file_path, as_attachment=True, download_name='business_card.html')
         
         else:
