@@ -104,21 +104,26 @@ class CardGenerator:
             ]
             
             # Add social media URLs to vCard
-            if card_data.get('linkedin'):
-                vcard_lines.append(f"URL:{card_data['linkedin']}")
-            if card_data.get('twitter'):
-                twitter_url = card_data['twitter']
-                if not twitter_url.startswith('http'):
-                    twitter_url = f"https://twitter.com/{card_data['twitter'].lstrip('@')}"
-                vcard_lines.append(f"URL:{twitter_url}")
-            if card_data.get('instagram'):
-                instagram_url = f"https://instagram.com/{card_data['instagram'].lstrip('@')}"
-                vcard_lines.append(f"URL:{instagram_url}")
-            if card_data.get('github'):
-                github_url = card_data['github']
-                if not github_url.startswith('http'):
-                    github_url = f"https://github.com/{card_data['github']}"
-                vcard_lines.append(f"URL:{github_url}")
+            if card_data.get('social_media'):
+                for platform, value in card_data['social_media'].items():
+                    if value:
+                        if platform == 'linkedin' and value.startswith('http'):
+                            vcard_lines.append(f"URL:{value}")
+                        elif platform == 'twitter':
+                            twitter_url = value if value.startswith('http') else f"https://twitter.com/{value.lstrip('@')}"
+                            vcard_lines.append(f"URL:{twitter_url}")
+                        elif platform == 'instagram':
+                            instagram_url = value if value.startswith('http') else f"https://instagram.com/{value.lstrip('@')}"
+                            vcard_lines.append(f"URL:{instagram_url}")
+                        elif platform == 'github':
+                            github_url = value if value.startswith('http') else f"https://github.com/{value}"
+                            vcard_lines.append(f"URL:{github_url}")
+                        elif platform == 'facebook':
+                            facebook_url = value if value.startswith('http') else f"https://facebook.com/{value}"
+                            vcard_lines.append(f"URL:{facebook_url}")
+                        elif platform == 'tiktok':
+                            tiktok_url = value if value.startswith('http') else f"https://tiktok.com/@{value.lstrip('@')}"
+                            vcard_lines.append(f"URL:{tiktok_url}")
             
             vcard_lines.extend([
                 f"ADR:;;{card_data.get('address', '')};;;;",
@@ -228,18 +233,30 @@ class CardGenerator:
             
             # Social media information
             social_info = []
-            if card_data.get('linkedin'):
-                linkedin_display = card_data['linkedin'].replace('https://linkedin.com/in/', 'in/').replace('https://www.linkedin.com/in/', 'in/')
-                social_info.append(f"💼 {linkedin_display}")
-            if card_data.get('twitter'):
-                twitter_display = card_data['twitter'] if card_data['twitter'].startswith('@') else f"@{card_data['twitter']}"
-                social_info.append(f"🐦 {twitter_display}")
-            if card_data.get('instagram'):
-                instagram_display = card_data['instagram'] if card_data['instagram'].startswith('@') else f"@{card_data['instagram']}"
-                social_info.append(f"📷 {instagram_display}")
-            if card_data.get('github'):
-                github_display = card_data['github'].replace('github.com/', '').replace('https://github.com/', '')
-                social_info.append(f"💻 {github_display}")
+            social_icons = {
+                'linkedin': '💼',
+                'twitter': '🐦',
+                'instagram': '📷',
+                'github': '💻',
+                'facebook': '📘',
+                'tiktok': '🎵'
+            }
+            
+            if card_data.get('social_media'):
+                for platform, value in card_data['social_media'].items():
+                    if value:
+                        icon = social_icons.get(platform, '🔗')
+                        if platform == 'linkedin':
+                            display_value = value.replace('https://linkedin.com/in/', 'in/').replace('https://www.linkedin.com/in/', 'in/')
+                        elif platform in ['twitter', 'instagram', 'tiktok']:
+                            display_value = value if value.startswith('@') else f"@{value}"
+                        elif platform == 'github':
+                            display_value = value.replace('github.com/', '').replace('https://github.com/', '')
+                        elif platform == 'facebook':
+                            display_value = value.replace('https://facebook.com/', '').replace('https://www.facebook.com/', '')
+                        else:
+                            display_value = value
+                        social_info.append(f"{icon} {display_value}")
             
             # Combine contact and social info
             all_contact_info = contact_info + social_info

@@ -46,6 +46,16 @@ def preview():
     """Generate preview of business card"""
     try:
         # Get form data
+        # Extract social media data
+        social_media = {}
+        for key, value in request.form.items():
+            if key.startswith('social_platform_') and value:
+                index = key.split('_')[-1]
+                social_value_key = f'social_value_{index}'
+                social_value = request.form.get(social_value_key, '')
+                if social_value:
+                    social_media[value] = social_value
+        
         card_data = {
             'name': request.form.get('name', ''),
             'job_title': request.form.get('job_title', ''),
@@ -54,10 +64,7 @@ def preview():
             'phone': request.form.get('phone', ''),
             'website': request.form.get('website', ''),
             'address': request.form.get('address', ''),
-            'linkedin': request.form.get('linkedin', ''),
-            'twitter': request.form.get('twitter', ''),
-            'instagram': request.form.get('instagram', ''),
-            'github': request.form.get('github', ''),
+            'social_media': social_media,
             'template': request.form.get('template', 'modern'),
             'font': request.form.get('font', 'Arial'),
             'color': request.form.get('color', 'blue'),

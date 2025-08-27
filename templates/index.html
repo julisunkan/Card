@@ -52,36 +52,16 @@
                                 <textarea class="form-control" id="address" name="address" rows="2" placeholder="123 Main St, City, State 12345"></textarea>
                             </div>
                             
-                            <h6 class="mb-3 mt-4">Social Media</h6>
+                            <h6 class="mb-3 mt-4">Social Media <small class="text-muted">(Max 4 accounts)</small></h6>
                             
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="linkedin" class="form-label">LinkedIn</label>
-                                        <input type="url" class="form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="twitter" class="form-label">Twitter/X</label>
-                                        <input type="text" class="form-control" id="twitter" name="twitter" placeholder="@yourusername">
-                                    </div>
-                                </div>
+                            <div id="social-media-container">
+                                <!-- Social media entries will be added here -->
                             </div>
                             
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="instagram" class="form-label">Instagram</label>
-                                        <input type="text" class="form-control" id="instagram" name="instagram" placeholder="@yourusername">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="github" class="form-label">GitHub</label>
-                                        <input type="text" class="form-control" id="github" name="github" placeholder="github.com/yourusername">
-                                    </div>
-                                </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="add-social-media" onclick="addSocialMedia()">
+                                    <i class="fas fa-plus me-1"></i>Add Social Media
+                                </button>
                             </div>
                         </div>
                         

@@ -10,6 +10,102 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Business Card Generator initialized');
 });
 
+// Social media counter
+let socialMediaCount = 0;
+const maxSocialMedia = 4;
+
+// Social media platform options
+const socialPlatforms = {
+    linkedin: { name: 'LinkedIn', icon: '💼', placeholder: 'https://linkedin.com/in/yourname' },
+    twitter: { name: 'Twitter/X', icon: '🐦', placeholder: '@yourusername' },
+    instagram: { name: 'Instagram', icon: '📷', placeholder: '@yourusername' },
+    github: { name: 'GitHub', icon: '💻', placeholder: 'github.com/yourusername' },
+    facebook: { name: 'Facebook', icon: '📘', placeholder: 'https://facebook.com/yourname' },
+    tiktok: { name: 'TikTok', icon: '🎵', placeholder: '@yourusername' }
+};
+
+function addSocialMedia() {
+    if (socialMediaCount >= maxSocialMedia) {
+        showToast('Maximum 4 social media accounts allowed', 'error');
+        return;
+    }
+    
+    const container = document.getElementById('social-media-container');
+    const socialDiv = document.createElement('div');
+    socialDiv.className = 'mb-3 social-media-entry';
+    socialDiv.dataset.index = socialMediaCount;
+    
+    // Get available platforms (not already selected)
+    const usedPlatforms = Array.from(container.querySelectorAll('select[name^="social_platform"]'))
+        .map(select => select.value)
+        .filter(value => value);
+    
+    const availablePlatforms = Object.keys(socialPlatforms)
+        .filter(platform => !usedPlatforms.includes(platform));
+    
+    if (availablePlatforms.length === 0) {
+        showToast('All social media platforms have been added', 'error');
+        return;
+    }
+    
+    socialDiv.innerHTML = `
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-select" name="social_platform_${socialMediaCount}" onchange="updateSocialPlaceholder(this)">
+                    <option value="">Select Platform</option>
+                    ${availablePlatforms.map(platform => 
+                        `<option value="${platform}">${socialPlatforms[platform].icon} ${socialPlatforms[platform].name}</option>`
+                    ).join('')}
+                </select>
+            </div>
+            <div class="col-md-7">
+                <input type="text" class="form-control" name="social_value_${socialMediaCount}" 
+                       placeholder="Select platform first" disabled>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeSocialMedia(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    container.appendChild(socialDiv);
+    socialMediaCount++;
+    
+    updateAddButton();
+}
+
+function removeSocialMedia(button) {
+    const socialDiv = button.closest('.social-media-entry');
+    socialDiv.remove();
+    socialMediaCount--;
+    updateAddButton();
+}
+
+function updateSocialPlaceholder(selectElement) {
+    const platform = selectElement.value;
+    const inputElement = selectElement.closest('.row').querySelector('input[name^="social_value"]');
+    
+    if (platform && socialPlatforms[platform]) {
+        inputElement.placeholder = socialPlatforms[platform].placeholder;
+        inputElement.disabled = false;
+    } else {
+        inputElement.placeholder = 'Select platform first';
+        inputElement.disabled = true;
+        inputElement.value = '';
+    }
+}
+
+function updateAddButton() {
+    const button = document.getElementById('add-social-media');
+    if (socialMediaCount >= maxSocialMedia) {
+        button.style.display = 'none';
+    } else {
+        button.style.display = 'inline-block';
+    }
+}
+
 // Template Gallery Functionality
 function initializeTemplateGallery() {
     const templatePreviews = document.querySelectorAll('.template-preview');
