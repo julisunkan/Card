@@ -1,0 +1,408 @@
+/* Mobile App Specific Styles */
+
+/* Mobile Container */
+.mobile-container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Mobile Sections */
+.mobile-section {
+    background: var(--app-card);
+    margin: 0 var(--mobile-padding) 20px var(--mobile-padding);
+    border-radius: var(--app-radius);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--app-border);
+    overflow: hidden;
+    box-shadow: var(--app-shadow);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    padding: 20px var(--mobile-padding) 16px;
+    background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
+    border-bottom: 1px solid var(--app-border);
+}
+
+.section-header i {
+    font-size: 20px;
+    color: white;
+    margin-right: 12px;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Mobile Form Groups */
+.mobile-form-group {
+    padding: 16px var(--mobile-padding);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-form-group:last-child {
+    border-bottom: none;
+}
+
+/* Mobile Inputs */
+.mobile-input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 2px solid transparent !important;
+    border-radius: 16px !important;
+    color: var(--app-text-primary) !important;
+    font-size: 16px !important;
+    padding: 16px !important;
+    height: auto !important;
+    min-height: 56px !important;
+    transition: var(--app-transition) !important;
+}
+
+.mobile-input:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: var(--app-primary) !important;
+    box-shadow: 0 0 0 0 transparent !important;
+    outline: none !important;
+}
+
+.mobile-input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Floating Labels */
+.form-floating > label {
+    color: var(--app-text-secondary) !important;
+    font-weight: 500 !important;
+    padding-left: 20px !important;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--app-primary) !important;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+}
+
+/* Mobile Labels */
+.mobile-label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--app-text-primary);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Mobile Selects */
+.mobile-select {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 2px solid transparent !important;
+    border-radius: 16px !important;
+    color: var(--app-text-primary) !important;
+    font-size: 16px !important;
+    padding: 16px !important;
+    height: 56px !important;
+    transition: var(--app-transition) !important;
+}
+
+.mobile-select:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: var(--app-primary) !important;
+    box-shadow: none !important;
+}
+
+.mobile-select option {
+    background: var(--app-surface) !important;
+    color: var(--app-text-primary) !important;
+}
+
+/* File Input */
+.mobile-file-input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 2px dashed rgba(255, 255, 255, 0.3) !important;
+    border-radius: 16px !important;
+    color: var(--app-text-primary) !important;
+    font-size: 16px !important;
+    padding: 20px !important;
+    text-align: center !important;
+    transition: var(--app-transition) !important;
+}
+
+.mobile-file-input:hover {
+    border-color: var(--app-primary) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.form-help {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--app-text-secondary);
+    text-align: center;
+}
+
+/* Toggle Switch */
+.mobile-toggle {
+    padding: 20px var(--mobile-padding);
+}
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-switch input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 52px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    position: relative;
+    transition: var(--app-transition);
+    margin-right: 12px;
+}
+
+.toggle-slider:before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    background: white;
+    top: 2px;
+    left: 2px;
+    transition: var(--app-transition);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: var(--app-primary);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(24px);
+}
+
+.toggle-label {
+    color: var(--app-text-primary);
+    font-weight: 500;
+}
+
+/* Mobile Buttons */
+.mobile-btn {
+    width: 100%;
+    padding: 16px !important;
+    border-radius: 16px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    border: 2px solid transparent !important;
+    transition: var(--app-transition) !important;
+}
+
+.mobile-btn-primary {
+    background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3) !important;
+    margin-bottom: 12px;
+}
+
+.mobile-btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4) !important;
+}
+
+.mobile-btn-secondary {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--app-text-primary) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.mobile-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Mobile Actions */
+.mobile-actions {
+    padding: 20px var(--mobile-padding);
+    background: var(--app-card);
+    margin: 0 var(--mobile-padding) 0 var(--mobile-padding);
+    border-radius: var(--app-radius);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--app-border);
+    box-shadow: var(--app-shadow);
+}
+
+/* Bottom Navigation */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--mobile-nav-height);
+    background: rgba(15, 15, 35, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--app-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--app-text-secondary);
+    transition: var(--app-transition);
+    padding: 8px 12px;
+    border-radius: 12px;
+    min-width: 60px;
+}
+
+.nav-item i {
+    font-size: 20px;
+    margin-bottom: 4px;
+    transition: var(--app-transition);
+}
+
+.nav-item span {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.nav-item.active {
+    color: var(--app-primary);
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.nav-item:hover:not(.active) {
+    color: var(--app-text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile Alerts */
+.mobile-alerts {
+    position: fixed;
+    top: calc(var(--mobile-header-height) + 16px);
+    left: var(--mobile-padding);
+    right: var(--mobile-padding);
+    z-index: 1001;
+}
+
+.mobile-toast {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--app-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    animation: slideDown 0.3s ease;
+}
+
+.mobile-toast.toast-error {
+    border-left-color: #ff6b6b;
+}
+
+.mobile-toast.toast-success {
+    border-left-color: #51cf66;
+}
+
+.mobile-toast i {
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+.mobile-toast span {
+    flex: 1;
+    color: var(--app-text-primary);
+    font-weight: 500;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--app-text-secondary);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 8px;
+    border-radius: 6px;
+    transition: var(--app-transition);
+}
+
+.toast-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--app-text-primary);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    :root {
+        --mobile-padding: 12px;
+    }
+    
+    .mobile-section {
+        margin: 0 8px 16px 8px;
+    }
+    
+    .section-header {
+        padding: 16px 12px 12px;
+    }
+    
+    .mobile-form-group {
+        padding: 12px;
+    }
+    
+    .mobile-actions {
+        margin: 0 8px 0 8px;
+    }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+    .mobile-input::-webkit-input-placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .mobile-input::-moz-placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .mobile-select::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .mobile-select::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+    
+    .mobile-select::-webkit-scrollbar-thumb {
+        background: var(--app-primary);
+        border-radius: 4px;
+    }
+}
