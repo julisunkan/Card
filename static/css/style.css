@@ -604,6 +604,41 @@ select.form-select option {
     color: white;
 }
 
+/* Close button alignment fixes */
+.btn .fas.fa-times {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    line-height: 1;
+}
+
+.btn-sm .fas.fa-times {
+    font-size: 0.75rem;
+}
+
+.social-media-entry .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 6px 8px;
+}
+
+.social-media-entry .btn i {
+    margin: 0;
+}
+
+/* Alert close button styling */
+.btn-close {
+    background-size: 0.75em;
+}
+
+/* Toast close button alignment */
+.toast .btn-close {
+    margin: auto 0.5rem auto 0;
+}
+
 /* Responsive text sizing */
 @media (max-width: 576px) {
     .card-title {
