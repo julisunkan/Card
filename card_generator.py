@@ -353,6 +353,21 @@ END:VCARD"""
                 c.drawString(text_x, text_y, info)
                 text_y -= 15
             
+            # Add logo if provided
+            if logo_path and os.path.exists(logo_path):
+                try:
+                    from reportlab.lib.utils import ImageReader
+                    # Position logo in top right corner
+                    logo_x = x_offset + card_width_pt - 60
+                    logo_y = y_offset + card_height_pt - 60
+                    logo_width = 50
+                    logo_height = 50
+                    
+                    c.drawImage(ImageReader(logo_path), logo_x, logo_y, 
+                              width=logo_width, height=logo_height, mask='auto')
+                except Exception as e:
+                    logging.error(f"Error adding logo to PDF: {str(e)}")
+            
             c.save()
             return export_path
         
@@ -370,6 +385,19 @@ END:VCARD"""
         """Generate animated HTML business card"""
         try:
             color_scheme = self.get_color_scheme(card_data.get('color', 'blue'))
+            
+            # Convert logo to base64 if provided
+            logo_data_url = ""
+            if logo_path and os.path.exists(logo_path):
+                try:
+                    import base64
+                    with open(logo_path, 'rb') as img_file:
+                        img_data = base64.b64encode(img_file.read()).decode('utf-8')
+                        file_extension = os.path.splitext(logo_path)[1].lower()
+                        mime_type = 'image/png' if file_extension == '.png' else 'image/jpeg'
+                        logo_data_url = f"data:{mime_type};base64,{img_data}"
+                except Exception as e:
+                    logging.error(f"Error converting logo to base64: {str(e)}")
             
             html_content = f"""
 <!DOCTYPE html>
@@ -486,16 +514,32 @@ END:VCARD"""
             transition: all 0.3s ease;
         }}
         
+        .logo {{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            animation: fadeInUp 1s ease-out 1s both;
+        }}
+        
         @media (max-width: 480px) {{
             .business-card {{
                 width: 90%;
                 max-width: 350px;
+            }}
+            
+            .logo {{
+                width: 50px;
+                height: 50px;
             }}
         }}
     </style>
 </head>
 <body>
     <div class="business-card">
+        {"<img src='" + logo_data_url + "' alt='Company Logo' class='logo'>" if logo_data_url else ""}
         <div class="name">{card_data.get('name', '')}</div>
         <div class="job-title">{card_data.get('job_title', '')}</div>
         <div class="company">{card_data.get('company', '')}</div>
