@@ -91,17 +91,41 @@ class CardGenerator:
     def generate_qr_code(self, card_data):
         """Generate QR code with vCard data"""
         try:
-            # Create vCard format
-            vcard = f"""BEGIN:VCARD
-VERSION:3.0
-FN:{card_data.get('name', '')}
-ORG:{card_data.get('company', '')}
-TITLE:{card_data.get('job_title', '')}
-EMAIL:{card_data.get('email', '')}
-TEL:{card_data.get('phone', '')}
-URL:{card_data.get('website', '')}
-ADR:;;{card_data.get('address', '')};;;;
-END:VCARD"""
+            # Create vCard format with social media
+            vcard_lines = [
+                "BEGIN:VCARD",
+                "VERSION:3.0",
+                f"FN:{card_data.get('name', '')}",
+                f"ORG:{card_data.get('company', '')}",
+                f"TITLE:{card_data.get('job_title', '')}",
+                f"EMAIL:{card_data.get('email', '')}",
+                f"TEL:{card_data.get('phone', '')}",
+                f"URL:{card_data.get('website', '')}"
+            ]
+            
+            # Add social media URLs to vCard
+            if card_data.get('linkedin'):
+                vcard_lines.append(f"URL:{card_data['linkedin']}")
+            if card_data.get('twitter'):
+                twitter_url = card_data['twitter']
+                if not twitter_url.startswith('http'):
+                    twitter_url = f"https://twitter.com/{card_data['twitter'].lstrip('@')}"
+                vcard_lines.append(f"URL:{twitter_url}")
+            if card_data.get('instagram'):
+                instagram_url = f"https://instagram.com/{card_data['instagram'].lstrip('@')}"
+                vcard_lines.append(f"URL:{instagram_url}")
+            if card_data.get('github'):
+                github_url = card_data['github']
+                if not github_url.startswith('http'):
+                    github_url = f"https://github.com/{card_data['github']}"
+                vcard_lines.append(f"URL:{github_url}")
+            
+            vcard_lines.extend([
+                f"ADR:;;{card_data.get('address', '')};;;;",
+                "END:VCARD"
+            ])
+            
+            vcard = '\n'.join(vcard_lines)
             
             qr = qrcode.QRCode(
                 version=1,
@@ -194,15 +218,33 @@ END:VCARD"""
             # Contact information
             contact_info = []
             if card_data.get('email'):
-                contact_info.append(f"Email: {card_data['email']}")
+                contact_info.append(f"✉ {card_data['email']}")
             if card_data.get('phone'):
-                contact_info.append(f"Phone: {card_data['phone']}")
+                contact_info.append(f"📞 {card_data['phone']}")
             if card_data.get('website'):
-                contact_info.append(f"Web: {card_data['website']}")
+                contact_info.append(f"🌐 {card_data['website']}")
             if card_data.get('address'):
-                contact_info.append(f"Address: {card_data['address']}")
+                contact_info.append(f"📍 {card_data['address']}")
             
-            for info in contact_info:
+            # Social media information
+            social_info = []
+            if card_data.get('linkedin'):
+                linkedin_display = card_data['linkedin'].replace('https://linkedin.com/in/', 'in/').replace('https://www.linkedin.com/in/', 'in/')
+                social_info.append(f"💼 {linkedin_display}")
+            if card_data.get('twitter'):
+                twitter_display = card_data['twitter'] if card_data['twitter'].startswith('@') else f"@{card_data['twitter']}"
+                social_info.append(f"🐦 {twitter_display}")
+            if card_data.get('instagram'):
+                instagram_display = card_data['instagram'] if card_data['instagram'].startswith('@') else f"@{card_data['instagram']}"
+                social_info.append(f"📷 {instagram_display}")
+            if card_data.get('github'):
+                github_display = card_data['github'].replace('github.com/', '').replace('https://github.com/', '')
+                social_info.append(f"💻 {github_display}")
+            
+            # Combine contact and social info
+            all_contact_info = contact_info + social_info
+            
+            for info in all_contact_info:
                 if font_small:
                     if text_align == 'center':
                         bbox = draw.textbbox((0, 0), info, font=font_small)
