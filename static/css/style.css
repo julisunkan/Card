@@ -1,27 +1,27 @@
 /* Mobile App Business Card Generator */
 
-/* Root variables for mobile app theming */
+/* Root variables for vibrant yellow/red mobile app theming */
 :root {
-    --app-primary: #667eea;
-    --app-secondary: #764ba2;
-    --app-accent: #4facfe;
-    --app-bg: #0f0f23;
-    --app-surface: #1a1a2e;
-    --app-card: rgba(255, 255, 255, 0.05);
-    --app-text-primary: #ffffff;
-    --app-text-secondary: rgba(255, 255, 255, 0.7);
-    --app-border: rgba(255, 255, 255, 0.1);
-    --app-shadow: 0 8px 32px rgba(102, 126, 234, 0.1);
-    --app-radius: 20px;
+    --app-primary: #ff6b35;
+    --app-secondary: #f7931e;
+    --app-accent: #ffb347;
+    --app-bg: #fff8f0;
+    --app-surface: #fef7e6;
+    --app-card: rgba(255, 107, 53, 0.08);
+    --app-text-primary: #2d1810;
+    --app-text-secondary: #8b4513;
+    --app-border: rgba(255, 107, 53, 0.2);
+    --app-shadow: 0 8px 32px rgba(255, 107, 53, 0.15);
+    --app-radius: 24px;
     --app-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --mobile-header-height: 60px;
-    --mobile-nav-height: 80px;
-    --mobile-padding: 16px;
+    --mobile-header-height: 70px;
+    --mobile-nav-height: 85px;
+    --mobile-padding: 20px;
 }
 
 /* Mobile app body */
 body.mobile-app {
-    background: linear-gradient(135deg, var(--app-bg) 0%, var(--app-surface) 100%);
+    background: linear-gradient(135deg, #fff8f0 0%, #fef7e6 50%, #ffebcd 100%);
     min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     padding: 0;
@@ -38,9 +38,8 @@ body.mobile-app {
     left: 0;
     right: 0;
     height: var(--mobile-header-height);
-    background: rgba(15, 15, 35, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--app-border);
+    background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
     z-index: 1000;
 }
 
@@ -61,21 +60,28 @@ body.mobile-app {
 .app-title {
     display: flex;
     align-items: center;
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--app-text-primary);
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .app-title i {
-    font-size: 20px;
-    color: var(--app-primary);
-    margin-right: 8px;
+    font-size: 24px;
+    color: #fff;
+    margin-right: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .time {
-    font-family: 'SF Mono', Consolas, monospace;
-    font-size: 14px;
-    color: var(--app-text-secondary);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
 /* Main Content Area */
