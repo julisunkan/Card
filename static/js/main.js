@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Social media counter
 let socialMediaCount = 0;
-const maxSocialMedia = 4;
+const maxSocialMedia = 1;
 
 // Social media platform options
 const socialPlatforms = {
@@ -26,7 +26,7 @@ const socialPlatforms = {
 
 function addSocialMedia() {
     if (socialMediaCount >= maxSocialMedia) {
-        showToast('Maximum 4 social media accounts allowed', 'error');
+        showToast('Maximum 1 social media account allowed', 'error');
         return;
     }
     
