@@ -38,7 +38,14 @@ class CardGenerator:
             {'id': 'Helvetica', 'name': 'Helvetica'},
             {'id': 'Times', 'name': 'Times New Roman'},
             {'id': 'Georgia', 'name': 'Georgia'},
-            {'id': 'Verdana', 'name': 'Verdana'}
+            {'id': 'Verdana', 'name': 'Verdana'},
+            {'id': 'Calibri', 'name': 'Calibri'},
+            {'id': 'Trebuchet', 'name': 'Trebuchet MS'},
+            {'id': 'Tahoma', 'name': 'Tahoma'},
+            {'id': 'Impact', 'name': 'Impact'},
+            {'id': 'Palatino', 'name': 'Palatino'},
+            {'id': 'Garamond', 'name': 'Garamond'},
+            {'id': 'Century', 'name': 'Century Gothic'}
         ]
     
     @staticmethod
@@ -50,7 +57,19 @@ class CardGenerator:
             {'id': 'green', 'name': 'Green', 'primary': '#28a745', 'secondary': '#6c757d'},
             {'id': 'purple', 'name': 'Purple', 'primary': '#6f42c1', 'secondary': '#6c757d'},
             {'id': 'orange', 'name': 'Orange', 'primary': '#fd7e14', 'secondary': '#6c757d'},
-            {'id': 'black', 'name': 'Black', 'primary': '#000000', 'secondary': '#6c757d'}
+            {'id': 'black', 'name': 'Black', 'primary': '#000000', 'secondary': '#6c757d'},
+            {'id': 'teal', 'name': 'Teal', 'primary': '#20c997', 'secondary': '#6c757d'},
+            {'id': 'indigo', 'name': 'Indigo', 'primary': '#6610f2', 'secondary': '#6c757d'},
+            {'id': 'pink', 'name': 'Pink', 'primary': '#e83e8c', 'secondary': '#6c757d'},
+            {'id': 'yellow', 'name': 'Yellow', 'primary': '#ffc107', 'secondary': '#495057'},
+            {'id': 'cyan', 'name': 'Cyan', 'primary': '#17a2b8', 'secondary': '#6c757d'},
+            {'id': 'brown', 'name': 'Brown', 'primary': '#8d4925', 'secondary': '#6c757d'},
+            {'id': 'navy', 'name': 'Navy', 'primary': '#1e3a8a', 'secondary': '#64748b'},
+            {'id': 'emerald', 'name': 'Emerald', 'primary': '#059669', 'secondary': '#6b7280'},
+            {'id': 'rose', 'name': 'Rose', 'primary': '#e11d48', 'secondary': '#6b7280'},
+            {'id': 'amber', 'name': 'Amber', 'primary': '#f59e0b', 'secondary': '#374151'},
+            {'id': 'violet', 'name': 'Violet', 'primary': '#8b5cf6', 'secondary': '#6b7280'},
+            {'id': 'slate', 'name': 'Slate', 'primary': '#475569', 'secondary': '#94a3b8'}
         ]
     
     def get_color_scheme(self, color_id):
