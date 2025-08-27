@@ -220,26 +220,26 @@ class CardGenerator:
                 draw.text((x_pos, y_pos), company, fill=color_scheme['secondary'], font=font_medium)
                 y_pos += line_height + 10
             
-            # Contact information
+            # Contact information with colorful icons
             contact_info = []
             if card_data.get('email'):
-                contact_info.append(f"✉ {card_data['email']}")
+                contact_info.append(f"📧 {card_data['email']}")
             if card_data.get('phone'):
-                contact_info.append(f"📞 {card_data['phone']}")
+                contact_info.append(f"📱 {card_data['phone']}")
             if card_data.get('website'):
-                contact_info.append(f"🌐 {card_data['website']}")
+                contact_info.append(f"🌍 {card_data['website']}")
             if card_data.get('address'):
-                contact_info.append(f"📍 {card_data['address']}")
+                contact_info.append(f"🏢 {card_data['address']}")
             
             # Social media information
             social_info = []
             social_icons = {
-                'linkedin': '💼',
+                'linkedin': '🔗',
                 'twitter': '🐦',
-                'instagram': '📷',
-                'github': '💻',
-                'facebook': '📘',
-                'tiktok': '🎵'
+                'instagram': '📸',
+                'github': '🐙',
+                'facebook': '👥',
+                'tiktok': '🎬'
             }
             
             if card_data.get('social_media'):
