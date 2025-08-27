@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title mb-0">
@@ -145,58 +145,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-images me-2"></i>Template Gallery
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="template-gallery">
-                    {% for template in templates %}
-                    <div class="template-preview mb-3" data-template="{{ template.id }}">
-                        <div class="template-card template-{{ template.id }}">
-                            <div class="template-name">{{ template.name }}</div>
-                            <div class="template-desc">{{ template.description }}</div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        
-        <div class="card mt-4">
-            <div class="card-header">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-info-circle me-2"></i>Features
-                </h5>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                    <li class="mb-2">
-                        <i class="fas fa-check text-success me-2"></i>Real-time preview
-                    </li>
-                    <li class="mb-2">
-                        <i class="fas fa-check text-success me-2"></i>Multiple export formats
-                    </li>
-                    <li class="mb-2">
-                        <i class="fas fa-check text-success me-2"></i>QR code generation
-                    </li>
-                    <li class="mb-2">
-                        <i class="fas fa-check text-success me-2"></i>Logo upload support
-                    </li>
-                    <li class="mb-2">
-                        <i class="fas fa-check text-success me-2"></i>Batch processing
-                    </li>
-                    <li class="mb-2">
-                        <i class="fas fa-check text-success me-2"></i>Print-ready output
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
