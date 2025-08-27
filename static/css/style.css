@@ -561,6 +561,49 @@ code {
     margin-bottom: 8px;
 }
 
+/* Dropdown menu styling for dark theme */
+.dropdown-menu {
+    background-color: rgba(33, 37, 41, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 8px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: var(--transition);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+.dropdown-item:active {
+    background-color: rgba(102, 126, 234, 0.2) !important;
+    color: white !important;
+}
+
+/* Select dropdown styling */
+.form-select option {
+    background-color: #2d3748 !important;
+    color: white !important;
+}
+
+.form-select:focus option:checked,
+.form-select option:checked {
+    background-color: #667eea !important;
+    color: white !important;
+}
+
+/* Override Bootstrap's default select styling */
+select.form-select option {
+    background-color: #2d3748;
+    color: white;
+}
+
 /* Responsive text sizing */
 @media (max-width: 576px) {
     .card-title {
