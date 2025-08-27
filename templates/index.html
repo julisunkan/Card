@@ -157,17 +157,6 @@ function clearForm() {
     document.getElementById('cardForm').reset();
 }
 
-// Template gallery interaction
-document.querySelectorAll('.template-preview').forEach(preview => {
-    preview.addEventListener('click', function() {
-        const templateId = this.dataset.template;
-        document.getElementById('template').value = templateId;
-        
-        // Update visual selection
-        document.querySelectorAll('.template-preview').forEach(p => p.classList.remove('selected'));
-        this.classList.add('selected');
-    });
-});
 
 // Real-time preview could be implemented here with AJAX
 // For now, using form submission for simplicity as per guidelines
