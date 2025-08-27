@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Preview - Business Card Generator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title mb-0">
+                    <i class="fas fa-eye me-2"></i>Card Preview
+                </h2>
+            </div>
+            <div class="card-body text-center">
+                {% if preview_image %}
+                <div class="preview-container mb-4">
+                    <img src="{{ preview_image }}" alt="Business Card Preview" class="img-fluid preview-image">
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Preview could not be generated. Please check your input and try again.
+                </div>
+                {% endif %}
+                
+                <div class="card-info mt-4">
+                    <h5>Card Details:</h5>
+                    <div class="row text-start">
+                        <div class="col-md-6">
+                            {% if card_data.name %}
+                            <p><strong>Name:</strong> {{ card_data.name }}</p>
+                            {% endif %}
+                            {% if card_data.job_title %}
+                            <p><strong>Job Title:</strong> {{ card_data.job_title }}</p>
+                            {% endif %}
+                            {% if card_data.company %}
+                            <p><strong>Company:</strong> {{ card_data.company }}</p>
+                            {% endif %}
+                            {% if card_data.email %}
+                            <p><strong>Email:</strong> {{ card_data.email }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            {% if card_data.phone %}
+                            <p><strong>Phone:</strong> {{ card_data.phone }}</p>
+                            {% endif %}
+                            {% if card_data.website %}
+                            <p><strong>Website:</strong> {{ card_data.website }}</p>
+                            {% endif %}
+                            {% if card_data.address %}
+                            <p><strong>Address:</strong> {{ card_data.address }}</p>
+                            {% endif %}
+                            <p><strong>Template:</strong> {{ card_data.template|title }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-download me-2"></i>Export Options
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('export_card', format='png') }}?{{ request.query_string.decode() }}" 
+                       class="btn btn-primary">
+                        <i class="fas fa-file-image me-2"></i>Download PNG
+                    </a>
+                    
+                    <a href="{{ url_for('export_card', format='pdf') }}?{{ request.query_string.decode() }}" 
+                       class="btn btn-primary">
+                        <i class="fas fa-file-pdf me-2"></i>Download PDF
+                    </a>
+                    
+                    <a href="{{ url_for('export_card', format='pdf_print') }}?{{ request.query_string.decode() }}" 
+                       class="btn btn-outline-primary">
+                        <i class="fas fa-print me-2"></i>Print-Ready PDF
+                    </a>
+                    
+                    <a href="{{ url_for('export_card', format='html') }}?{{ request.query_string.decode() }}" 
+                       class="btn btn-outline-primary">
+                        <i class="fas fa-code me-2"></i>Animated HTML
+                    </a>
+                </div>
+                
+                <hr>
+                
+                <div class="text-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Editor
+                    </a>
+                </div>
+                
+                <div class="mt-4">
+                    <h6>Export Information:</h6>
+                    <ul class="list-unstyled small">
+                        <li><i class="fas fa-info-circle me-1"></i> PNG: High-resolution image</li>
+                        <li><i class="fas fa-info-circle me-1"></i> PDF: Standard document format</li>
+                        <li><i class="fas fa-info-circle me-1"></i> Print-Ready: CMYK color profile</li>
+                        <li><i class="fas fa-info-circle me-1"></i> HTML: Animated digital card</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        {% if card_data.include_qr %}
+        <div class="card mt-4">
+            <div class="card-header">
+                <h6 class="card-title mb-0">
+                    <i class="fas fa-qrcode me-2"></i>QR Code Info
+                </h6>
+            </div>
+            <div class="card-body">
+                <p class="small mb-0">
+                    Your business card includes a QR code containing your contact information in vCard format. 
+                    People can scan it to quickly add your details to their contacts.
+                </p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Add click handlers for export buttons to show loading state
+document.querySelectorAll('a[href*="export"]').forEach(link => {
+    link.addEventListener('click', function() {
+        const icon = this.querySelector('i');
+        const originalClass = icon.className;
+        icon.className = 'fas fa-spinner fa-spin me-2';
+        
+        setTimeout(() => {
+            icon.className = originalClass;
+        }, 2000);
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,278 @@
+/* Custom styles for Business Card Generator */
+
+/* Template Gallery Styles */
+.template-gallery {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.template-preview {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.template-preview:hover {
+    background-color: var(--bs-gray-800);
+    transform: translateY(-2px);
+}
+
+.template-preview.selected {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+.template-card {
+    background: var(--bs-gray-900);
+    border-radius: 6px;
+    padding: 15px;
+    border: 2px solid var(--bs-gray-700);
+    min-height: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.template-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.template-desc {
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+
+/* Template-specific styling */
+.template-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--bs-primary);
+}
+
+.template-classic {
+    border: 3px solid var(--bs-gray-600);
+    border-radius: 2px;
+}
+
+.template-creative {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-info) 100%);
+    color: white;
+}
+
+.template-elegant::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid var(--bs-primary);
+}
+
+.template-tech {
+    background: var(--bs-dark);
+    border-left: 5px solid var(--bs-info);
+}
+
+/* Preview Image Styles */
+.preview-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--bs-gray-800);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.preview-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Enhancements */
+.card-header {
+    background: var(--bs-gray-800);
+    border-bottom: 2px solid var(--bs-primary);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Button Enhancements */
+.btn {
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading States */
+.btn:disabled {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .preview-container {
+        padding: 10px;
+    }
+    
+    .template-gallery {
+        max-height: 300px;
+    }
+    
+    .btn-lg {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Animation for smooth transitions */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer Styling */
+footer {
+    background: var(--bs-gray-900);
+    color: var(--bs-gray-300);
+}
+
+/* Alert Enhancements */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Card Enhancements */
+.card {
+    border: 1px solid var(--bs-gray-700);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Code styling */
+code {
+    color: var(--bs-info);
+    background: var(--bs-gray-800);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* List styling */
+.list-unstyled li {
+    padding: 2px 0;
+}
+
+/* Scrollbar styling for webkit browsers */
+.template-gallery::-webkit-scrollbar {
+    width: 6px;
+}
+
+.template-gallery::-webkit-scrollbar-track {
+    background: var(--bs-gray-800);
+    border-radius: 3px;
+}
+
+.template-gallery::-webkit-scrollbar-thumb {
+    background: var(--bs-primary);
+    border-radius: 3px;
+}
+
+.template-gallery::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-primary-dark);
+}
+
+/* File input styling */
+.form-control[type="file"] {
+    border: 2px dashed var(--bs-gray-600);
+    background: var(--bs-gray-800);
+    transition: all 0.3s ease;
+}
+
+.form-control[type="file"]:hover {
+    border-color: var(--bs-primary);
+    background: var(--bs-gray-700);
+}
+
+/* Success states */
+.text-success {
+    color: var(--bs-success) !important;
+}
+
+/* Dark theme consistency */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #1a1a1a;
+    --bs-body-color: #e9ecef;
+}
+
+/* Navbar enhancement */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.navbar-brand i {
+    color: var(--bs-primary);
+}
+
+/* Grid spacing */
+.row {
+    margin-bottom: 20px;
+}
+
+/* Card info styling */
+.card-info {
+    background: var(--bs-gray-800);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.card-info h5 {
+    color: var(--bs-primary);
+    margin-bottom: 15px;
+}
+
+/* Export button styling */
+.d-grid .btn {
+    margin-bottom: 8px;
+}
+
+/* Responsive text sizing */
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
